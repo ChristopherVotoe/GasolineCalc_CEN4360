@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">gasolineCalc_CEN4360_ChristopherVotoe</string>
+    <string name="jerrycan_picture">Jerrycan Picture</string>
+    <string name="gasoline">Gasoline</string>
+    <string name="calculator">Calculator</string>
+    <string name="distance">Distance</string>
+    <string name="cost_per_gallon">Cost Per Gallon</string>
+    <string name="highway_mpg">Highway MPG</string>
+    <string name="aggressive_driver">Aggressive Driver?</string>
+    <string name="need_a_c">Need A/C?</string>
+    <string name="road_type">Road Type</string>
+    <string name="average_speed">Average Speed</string>
+    <string name="calculate">Calculate</string>
+</resources>
