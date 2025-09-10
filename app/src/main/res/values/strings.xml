@@ -11,4 +11,17 @@
     <string name="road_type">Road Type</string>
     <string name="average_speed">Average Speed</string>
     <string name="calculate">Calculate</string>
+    <string name="please_enter_the_distance">Please enter the distance</string>
+    <string name="please_enter_the_cost_per_gallon">Please enter the cost per gallon</string>
+    <string name="please_enter_the_vehicle_highway_mpg">Please enter the vehicle highway MPG</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="you_ll_need_to_spend_this_much_on_a_round_trip">You\'ll need to spend this\n   much on a round trip:</string>
+    <string name="_35">35</string>
+    <string-array name="roadtype">
+        <item>Highway</item>
+        <item>City</item>
+        <item>Mixed</item>
+    </string-array>
+
 </resources>

@@ -5,7 +5,34 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="75dp"
     tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/CPGNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="4dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/please_enter_the_cost_per_gallon"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/CPGallon"
+        app:layout_constraintTop_toBottomOf="@+id/distanceNumber" />
+
+    <EditText
+        android:id="@+id/HighwayMPGNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/please_enter_the_vehicle_highway_mpg"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/HMPG"
+        app:layout_constraintTop_toBottomOf="@+id/CPGNumber" />
 
     <ImageView
         android:id="@+id/jerryCan"
@@ -55,64 +82,189 @@
         android:id="@+id/Distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="124dp"
         android:text="@string/distance"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="170dp" />
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/CPGallon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:text="@string/cost_per_gallon"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="204dp" />
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Distance" />
 
     <TextView
         android:id="@+id/HMPG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:text="@string/highway_mpg"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="242dp" />
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CPGallon" />
 
     <TextView
         android:id="@+id/AggDriver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:text="@string/aggressive_driver"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="277dp" />
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HMPG" />
 
     <TextView
         android:id="@+id/AC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:text="@string/need_a_c"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="323dp" />
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AggDriver" />
 
     <TextView
         android:id="@+id/RoadT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:text="@string/road_type"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="361dp" />
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AC" />
 
     <TextView
         android:id="@+id/AvgSpeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:text="@string/average_speed"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="404dp" />
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RoadT" />
 
     <Button
         android:id="@+id/Calculate_Button"
+        android:layout_width="374dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="150dp"
+        android:text="@string/calculate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AvgSpeed"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/distanceNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="24dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/please_enter_the_distance"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/Distance"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Spinner
+        android:id="@+id/RoadType_DropBox"
+        android:layout_width="215dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:entries="@array/roadtype"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBaseline_toBaselineOf="@id/RoadT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.831"
+        app:layout_constraintStart_toEndOf="@id/RoadT" />
+
+    <CheckBox
+        android:id="@+id/AG_Checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/calculate"
-        tools:layout_editor_absoluteX="139dp"
-        tools:layout_editor_absoluteY="506dp" />
+        app:layout_constraintBaseline_toBaselineOf="@id/AggDriver"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.005"
+        app:layout_constraintStart_toEndOf="@id/AggDriver" />
+
+    <RadioGroup
+        android:id="@+id/acRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="341dp"
+        android:layout_marginBottom="342dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yes" />
+
+        <RadioButton
+            android:id="@+id/No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no" />
+
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/TotalSpent_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/you_ll_need_to_spend_this_much_on_a_round_trip"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Calculate_Button" />
+
+    <SeekBar
+        android:id="@+id/AvgSpeed_SeekBar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="195dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:max="8"
+        android:progress="0"
+        app:layout_constraintStart_toEndOf="@+id/AvgSpeed"
+        app:layout_constraintTop_toBottomOf="@+id/RoadType_DropBox" />
+
+    <TextView
+        android:id="@+id/displayAvgSpeedSliderNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="132dp"
+        android:text="@string/_35"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AvgSpeed_SeekBar" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
