@@ -250,7 +250,7 @@
         android:layout_height="29dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:max="8"
+        android:max="7"
         android:progress="0"
         app:layout_constraintStart_toEndOf="@+id/AvgSpeed"
         app:layout_constraintTop_toBottomOf="@+id/RoadType_DropBox" />

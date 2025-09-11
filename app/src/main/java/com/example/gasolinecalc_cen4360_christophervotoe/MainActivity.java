@@ -7,7 +7,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -32,12 +34,29 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        //int modifier = 0;
-
         distanceInput = findViewById(R.id.distanceNumber);
         costInput     = findViewById(R.id.CPGNumber);
         mpgInput      = findViewById(R.id.HighwayMPGNumber);
-        Log.d("distance",""+distanceInput);
+
+
+
+        // How we get the avgSpeed bar to work correctly
+        SeekBar seekBar = findViewById(R.id.AvgSpeed_SeekBar);
+        TextView speedTextView = findViewById(R.id.displayAvgSpeedSliderNumber);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                int actualValue = 35 + (progress * 5);
+                speedTextView.setText("" + actualValue);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
 
         Button calcBtn = findViewById(R.id.Calculate_Button);
         calcBtn.setOnClickListener(v -> printValue());
@@ -56,15 +75,15 @@ public class MainActivity extends AppCompatActivity {
 
     private int calcModifierValue(){
         int modifier = 0;
-        CheckBox aggresiveDriver = findViewById(R.id.AG_Checkbox);
-
+        CheckBox aggressiveDriver = findViewById(R.id.AG_Checkbox);
+        SeekBar avgSpeed = findViewById(R.id.AvgSpeed_SeekBar);
         RadioGroup AC = findViewById(R.id.acRadioGroup);
         Spinner roadType = findViewById(R.id.RoadType_DropBox);
         String roadTypeValue = roadType.getSelectedItem().toString();
         int selectedChoice = AC.getCheckedRadioButtonId();
 
 
-        if(aggresiveDriver.isChecked())
+        if(aggressiveDriver.isChecked())
         {
             switch (roadTypeValue) {
                 case "Highway":
@@ -99,10 +118,31 @@ public class MainActivity extends AppCompatActivity {
             modifier+=15;
         }
 
+
         return modifier;
     }
 
+    private float calcFinalMPG(int modifier,EditText initialMPG)
+    {
+        float finalMPG = 0;
+        String initialMPGString =initialMPG.toString().trim();
+        int initialMPGInt = Integer.parseInt(initialMPGString);
+        finalMPG = initialMPGInt * ((float) (100 - modifier) / 100);
+        return finalMPG;
+    }
 
+    private float calcGallons(EditText distance, float finalMPG) {
+        String distanceString = distance.toString().trim();
+        int distanceInt = Integer.parseInt(distanceString);
+        return (distanceInt/finalMPG);
+    }
+
+    private float calcRoundTripCost(float gallon, TextView costPerGallon)
+    {
+        String costPerGallonString = costPerGallon.toString().trim();
+        float costPerGallonFloat = Float.parseFloat(costPerGallonString);
+        return ((gallon * costPerGallonFloat)*2);
+    }
 
 
 }
