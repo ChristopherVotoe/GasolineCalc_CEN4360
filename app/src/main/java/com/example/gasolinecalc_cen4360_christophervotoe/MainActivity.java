@@ -18,9 +18,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText distanceInput, costInput, mpgInput;
+    private TextView resultText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,18 +62,46 @@ public class MainActivity extends AppCompatActivity {
 
 
         Button calcBtn = findViewById(R.id.Calculate_Button);
-        calcBtn.setOnClickListener(v -> printValue());
+        calcBtn.setOnClickListener(v -> calculateAndDisplay());
 
     }
 
-    private void printValue() {
-        String dist = distanceInput.getText().toString().trim();
-        String cost = costInput.getText().toString().trim();
-        String mpg  = mpgInput.getText().toString().trim();
+//    private void printValue() {
+//        String dist = distanceInput.getText().toString().trim();
+//        String cost = costInput.getText().toString().trim();
+//        String mpg  = mpgInput.getText().toString().trim();
+//
+//        Log.d("INPUTS", "distance=" + dist + ", cost=" + cost + ", mpg=" + mpg);
+//        Toast.makeText(this, "distance=" + dist + ", cost=" + cost + ", mpg=" + mpg,
+//                Toast.LENGTH_SHORT).show();
+//    }
 
-        Log.d("INPUTS", "distance=" + dist + ", cost=" + cost + ", mpg=" + mpg);
-        Toast.makeText(this, "distance=" + dist + ", cost=" + cost + ", mpg=" + mpg,
-                Toast.LENGTH_SHORT).show();
+    private void calculateAndDisplay() {
+
+        int modifier = calcModifierValue();
+
+        // 2) Final MPG
+        float finalMPG = calcFinalMPG(modifier, mpgInput);
+        if (finalMPG <= 0f) {
+            Toast.makeText(this, "Enter a valid Highway MPG", Toast.LENGTH_SHORT).show();
+            resultText.setText("—");
+            return;
+        }
+
+        // 3) Gallons for the entered distance (we’ll double if one-way)
+        float gallons = calcGallons(distanceInput, finalMPG);
+        if (gallons <= 0f) {
+            Toast.makeText(this, "Enter a valid distance", Toast.LENGTH_SHORT).show();
+            resultText.setText("—");
+            return;
+        }
+
+        // 4) Cost = gallons * $/gal
+        float cost = calcRoundTripCost(gallons, costInput); // costInput is EditText
+        TextView displayText = findViewById(R.id.TotalSpent_Text);
+
+        String costStr = String.format("$%.2f", cost);
+        displayText.append(" " + costStr);
     }
 
     private int calcModifierValue(){
@@ -82,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         String roadTypeValue = roadType.getSelectedItem().toString();
         int selectedChoice = AC.getCheckedRadioButtonId();
 
-
+        //If aggressive or not, how it affects depending on road type
         if(aggressiveDriver.isChecked())
         {
             switch (roadTypeValue) {
@@ -112,34 +143,42 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }
-
+        //If AC is on
         if(selectedChoice == R.id.Yes)
         {
             modifier+=15;
         }
 
+        // Checks the speed of the car and how much over it is
+        int progress = avgSpeed.getProgress();
+        int speed = 35 + (progress*5);
+        if(speed>50)
+        {
+            int speedOver = (speed-50) / 5;
+            modifier += speedOver * 5;
 
+        }
         return modifier;
     }
 
     private float calcFinalMPG(int modifier,EditText initialMPG)
     {
         float finalMPG = 0;
-        String initialMPGString =initialMPG.toString().trim();
+        String initialMPGString =initialMPG.getText().toString().trim();
         int initialMPGInt = Integer.parseInt(initialMPGString);
         finalMPG = initialMPGInt * ((float) (100 - modifier) / 100);
         return finalMPG;
     }
 
     private float calcGallons(EditText distance, float finalMPG) {
-        String distanceString = distance.toString().trim();
+        String distanceString = distance.getText().toString().trim();
         int distanceInt = Integer.parseInt(distanceString);
         return (distanceInt/finalMPG);
     }
 
-    private float calcRoundTripCost(float gallon, TextView costPerGallon)
+    private float calcRoundTripCost(float gallon, EditText costPerGallon)
     {
-        String costPerGallonString = costPerGallon.toString().trim();
+        String costPerGallonString = costPerGallon.getText().toString().trim();
         float costPerGallonFloat = Float.parseFloat(costPerGallonString);
         return ((gallon * costPerGallonFloat)*2);
     }
