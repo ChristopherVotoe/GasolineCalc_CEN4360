@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int calcModifierValue(){
         int modifier = 0;
-        CheckBox agresiveDriver = findViewById(R.id.AG_Checkbox);
+        CheckBox aggresiveDriver = findViewById(R.id.AG_Checkbox);
 
         RadioGroup AC = findViewById(R.id.acRadioGroup);
         Spinner roadType = findViewById(R.id.RoadType_DropBox);
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         int selectedChoice = AC.getCheckedRadioButtonId();
 
 
-        if(agresiveDriver.isChecked())
+        if(aggresiveDriver.isChecked())
         {
             switch (roadTypeValue) {
                 case "Highway":
