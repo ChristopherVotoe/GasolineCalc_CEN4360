@@ -18,6 +18,7 @@
     <string name="yes">Yes</string>
     <string name="you_ll_need_to_spend_this_much_on_a_round_trip">You\'ll need to spend this\n   much on a round trip:</string>
     <string name="_35">35</string>
+    <string name="_0_00">$0.00</string>
     <string-array name="roadtype">
         <item>Highway</item>
         <item>City</item>

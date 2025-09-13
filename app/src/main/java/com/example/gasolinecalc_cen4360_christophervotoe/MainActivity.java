@@ -1,8 +1,6 @@
 package com.example.gasolinecalc_cen4360_christophervotoe;
 
 import android.os.Bundle;
-import android.os.DropBoxManager;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -11,14 +9,13 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import org.w3c.dom.Text;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,15 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    private void printValue() {
-//        String dist = distanceInput.getText().toString().trim();
-//        String cost = costInput.getText().toString().trim();
-//        String mpg  = mpgInput.getText().toString().trim();
-//
-//        Log.d("INPUTS", "distance=" + dist + ", cost=" + cost + ", mpg=" + mpg);
-//        Toast.makeText(this, "distance=" + dist + ", cost=" + cost + ", mpg=" + mpg,
-//                Toast.LENGTH_SHORT).show();
-//    }
+
 
     private void calculateAndDisplay() {
 
@@ -88,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // 3) Gallons for the entered distance (we’ll double if one-way)
+        // 3) Gallons for the entered distance
         float gallons = calcGallons(distanceInput, finalMPG);
         if (gallons <= 0f) {
             Toast.makeText(this, "Enter a valid distance", Toast.LENGTH_SHORT).show();
@@ -96,12 +85,13 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // 4) Cost = gallons * $/gal
-        float cost = calcRoundTripCost(gallons, costInput); // costInput is EditText
-        TextView displayText = findViewById(R.id.TotalSpent_Text);
+        // 4) Cost = gallons * $
+        float cost = calcRoundTripCost(gallons, costInput);
+        TextView displayText = findViewById(R.id.roundTripFinalAmount);
 
-        String costStr = String.format("$%.2f", cost);
-        displayText.append(" " + costStr);
+
+        String costStr = String.format("%.2f", cost);
+        displayText.setText(costStr);
     }
 
     private int calcModifierValue(){
